@@ -16,6 +16,11 @@ namespace Igra
         int backgroundspeed;
         Random rnd;
         int playerSpeed;
+
+        PictureBox[] swords;
+        int swordSpeed;
+
+
         public Form1()
         {
             InitializeComponent();
@@ -27,6 +32,20 @@ namespace Igra
             cloud = new PictureBox[20];
             rnd = new Random();
             playerSpeed = 50;
+
+            swords = new PictureBox[1];
+            swordSpeed = 200;
+
+            for (int i = 0; i < swords.Length; i++)
+            {
+                swords[i] = new PictureBox();
+                swords[i].BorderStyle = BorderStyle.None;
+                swords[i].Size = new Size(50, 10);
+                swords[i].BackColor = Color.White;
+
+                this.Controls.Add(swords[i]);
+            }
+
 
             for (int i = 0; i < cloud.Length; i++)
             {
@@ -119,6 +138,17 @@ namespace Igra
             {
                 moveDown.Start();
             }
+            if (e.KeyCode == Keys.Space)
+            {
+                for (int i = 0; i < swords.Length; i++)
+                {
+                    if (swords[i].Left > 1280)
+                    {
+                        swords[i].Location = new Point(mainPlayer.Location.X+100 +i*50,mainPlayer.Location.Y+100);
+
+                    }
+                }
+            }
         }
 
         private void Form1_KeyUp(object sender, KeyEventArgs e)
@@ -129,6 +159,14 @@ namespace Igra
                 RightMove.Stop();
                 moveUp.Stop();
                 moveDown.Stop();
+        }
+
+        private void MoveSwordTimer_Tick(object sender, EventArgs e)
+        {
+            for (int i = 0; i < swords.Length; i++)
+            {
+                swords[i].Left += swordSpeed;
+            }
         }
     }
 }

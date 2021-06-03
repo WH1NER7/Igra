@@ -36,6 +36,7 @@
             this.moveUp = new System.Windows.Forms.Timer(this.components);
             this.moveDown = new System.Windows.Forms.Timer(this.components);
             this.LeftMoveTimer = new System.Windows.Forms.Timer(this.components);
+            this.MoveSwordTimer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.mainPlayer)).BeginInit();
             this.SuspendLayout();
             // 
@@ -75,6 +76,11 @@
             this.LeftMoveTimer.Interval = 50;
             this.LeftMoveTimer.Tick += new System.EventHandler(this.LeftMoveTimer_Tick);
             // 
+            // MoveSwordTimer
+            // 
+            this.MoveSwordTimer.Enabled = true;
+            this.MoveSwordTimer.Tick += new System.EventHandler(this.MoveSwordTimer_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -102,6 +108,7 @@
         private System.Windows.Forms.Timer moveUp;
         private System.Windows.Forms.Timer moveDown;
         private System.Windows.Forms.Timer LeftMoveTimer;
+        private System.Windows.Forms.Timer MoveSwordTimer;
     }
 }
 
