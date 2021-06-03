@@ -15,6 +15,7 @@ namespace Igra
         PictureBox[] cloud;
         int backgroundspeed;
         Random rnd;
+        int playerSpeed;
         public Form1()
         {
             InitializeComponent();
@@ -25,6 +26,7 @@ namespace Igra
             backgroundspeed = 6;
             cloud = new PictureBox[20];
             rnd = new Random();
+            playerSpeed = 50;
 
             for (int i = 0; i < cloud.Length; i++)
             {
@@ -38,7 +40,7 @@ namespace Igra
                 }
                 else
                 {
-                    cloud[i].Size = new Size(180,30);
+                    cloud[i].Size = new Size(180, 30);
                     cloud[i].BackColor = Color.FromArgb(rnd.Next(50, 125), 255, 205, 255);
                 }
                 this.Controls.Add(cloud[i]);
@@ -64,9 +66,69 @@ namespace Igra
                 if (cloud[i].Left >= 1280)
                 {
                     cloud[i].Left = cloud[i].Left;
-                
+
                 }
             }
+        }
+
+
+        private void LeftMoveTimer_Tick(object sender, EventArgs e)
+        {
+            if (mainPlayer.Left > 10)
+            {
+                mainPlayer.Left -= playerSpeed;
+            }
+        }
+
+        private void RightMove_Tick(object sender, EventArgs e)
+        {
+            if (mainPlayer.Left < 1150)
+            {
+                mainPlayer.Left += playerSpeed;
+            }
+        }
+
+        private void moveUp_Tick(object sender, EventArgs e)
+        {
+            mainPlayer.Top -= playerSpeed;
+        }
+
+        private void moveDown_Tick(object sender, EventArgs e)
+        {
+            mainPlayer.Top += playerSpeed;
+        }
+
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            mainPlayer.Image = Properties.Resources.run;
+
+            if (e.KeyCode == Keys.Left)
+            {
+                LeftMoveTimer.Start();
+
+            }
+            if (e.KeyCode == Keys.Right)
+            {
+                RightMove.Start();
+            }
+            if (e.KeyCode == Keys.Up)
+            {
+                moveUp.Start();
+            }
+            if (e.KeyCode == Keys.Down)
+            {
+                moveDown.Start();
+            }
+        }
+
+        private void Form1_KeyUp(object sender, KeyEventArgs e)
+        {
+            mainPlayer.Image = Properties.Resources.sV7Mefu;
+           
+                LeftMoveTimer.Stop();
+                RightMove.Stop();
+                moveUp.Stop();
+                moveDown.Stop();
         }
     }
 }
